@@ -1,5 +1,5 @@
 
-/*! pako 2.1.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
+/*! @nichoth/pako 2.1.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -97,7 +97,6 @@
     }
     return crc ^ -1; // >>> 0;
   };
-
   var crc32_1 = crc32;
 
   // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -261,7 +260,6 @@
             hold >>>= op;
             bits -= op;
             op = here >>> 16 & 0xff /*here.op*/;
-
             if (op & 16) {
               /* distance base */
               dist = here & 0xffff /*here.val*/;
@@ -318,7 +316,6 @@
                   //                }
                   //#endif
                 }
-
                 from = 0; // window index
                 from_source = s_window;
                 if (wnext === 0) {
@@ -562,7 +559,6 @@
       opts.bits = 1;
       return 0; /* no symbols, but wait for decoding to report error */
     }
-
     for (min = 1; min < max; min++) {
       if (count[min] !== 0) {
         break;
@@ -581,7 +577,6 @@
         return -1;
       } /* over-subscribed */
     }
-
     if (left > 0 && (type === CODES$1 || max !== 1)) {
       return -1; /* incomplete set */
     }
@@ -964,7 +959,6 @@
     this.back = 0; /* bits back of last unprocessed length/lit */
     this.was = 0; /* initial length of match */
   }
-
   var inflateStateCheck = function inflateStateCheck(strm) {
     if (!strm) {
       return 1;
@@ -1063,7 +1057,6 @@
     if (ret !== Z_OK$1) {
       strm.state = null /*Z_NULL*/;
     }
-
     return ret;
   };
   var inflateInit = function inflateInit(strm) {
@@ -1432,7 +1425,6 @@
           } else if (state.head) {
             state.head.extra = null /*Z_NULL*/;
           }
-
           state.mode = EXTRA;
         /* falls through */
         case EXTRA:
@@ -1457,7 +1449,6 @@
                 //        len + copy > state.head.extra_max ?
                 //        state.head.extra_max - len : copy);
               }
-
               if (state.flags & 0x0200 && state.wrap & 4) {
                 state.check = crc32_1(state.check, input, copy, next);
               }
@@ -1548,7 +1539,6 @@
             bits = 0;
             //===//
           }
-
           if (state.head) {
             state.head.hcrc = state.flags >> 9 & 1;
             state.head.done = true;
@@ -1770,7 +1760,6 @@
             bits -= 3;
             //---//
           }
-
           while (state.have < 19) {
             state.lens[order[state.have++]] = 0;
           }
@@ -1813,7 +1802,6 @@
               bits += 8;
               //---//
             }
-
             if (here_val < 16) {
               //--- DROPBITS(here.bits) ---//
               hold >>>= here_bits;
@@ -1893,7 +1881,6 @@
                 bits -= 7;
                 //---//
               }
-
               if (state.have + copy > state.nlen + state.ndist) {
                 strm.msg = 'invalid bit length repeat';
                 state.mode = BAD;
@@ -2007,7 +1994,6 @@
             bits += 8;
             //---//
           }
-
           if (here_op && (here_op & 0xf0) === 0) {
             last_bits = here_bits;
             last_op = here_op;
@@ -2104,7 +2090,6 @@
             bits += 8;
             //---//
           }
-
           if ((here_op & 0xf0) === 0) {
             last_bits = here_bits;
             last_op = here_op;
@@ -2206,7 +2191,6 @@
               //          break;
               //#endif
             }
-
             if (copy > state.wnext) {
               copy -= state.wnext;
               from = state.wsize - copy;
@@ -2276,7 +2260,6 @@
             //===//
             //Tracev((stderr, "inflate:   check matches trailer\n"));
           }
-
           state.mode = LENGTH;
         /* falls through */
         case LENGTH:
@@ -2302,7 +2285,6 @@
             //===//
             //Tracev((stderr, "inflate:   length matches trailer\n"));
           }
-
           state.mode = DONE;
         /* falls through */
         case DONE:
@@ -2453,14 +2435,14 @@
     inflateInfo: inflateInfo
   };
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
 
   var _has = function _has(obj, key) {

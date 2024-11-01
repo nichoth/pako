@@ -1,5 +1,5 @@
 
-/*! pako 2.1.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
+/*! @nichoth/pako 2.1.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -184,7 +184,6 @@
     this.max_code = 0; /* largest code with non zero frequency */
     this.stat_desc = stat_desc; /* the corresponding static tree */
   }
-
   var d_code = function d_code(dist) {
     return dist < 256 ? _dist_code[dist] : _dist_code[256 + (dist >>> 7)];
   };
@@ -614,7 +613,6 @@
             lc -= base_length[code];
             send_bits(s, lc, extra); /* send the extra length bits */
           }
-
           dist--; /* dist is now the match distance - 1 */
           code = d_code(dist);
           //Assert (code < D_CODES, "bad d_code");
@@ -684,7 +682,6 @@
       }
       /* node is 0 or 1 so it does not have extra bits */
     }
-
     desc.max_code = max_code;
 
     /* The elements heap[heap_len/2+1 .. heap_len] are leaves of the tree,
@@ -759,7 +756,6 @@
     for (n = 0; n <= max_code; n++) {
       curlen = nextlen;
       nextlen = tree[(n + 1) * 2 + 1] /*.Len*/;
-
       if (++count < max_count && curlen === nextlen) {
         continue;
       } else if (count < min_count) {
@@ -774,7 +770,6 @@
       } else {
         s.bl_tree[REPZ_11_138 * 2] /*.Freq*/++;
       }
-
       count = 0;
       prevlen = curlen;
       if (nextlen === 0) {
@@ -817,7 +812,6 @@
     for (n = 0; n <= max_code; n++) {
       curlen = nextlen;
       nextlen = tree[(n + 1) * 2 + 1] /*.Len*/;
-
       if (++count < max_count && curlen === nextlen) {
         continue;
       } else if (count < min_count) {
@@ -1063,7 +1057,6 @@
       // Assert(buf != (char*)0, "lost buf");
       opt_lenb = static_lenb = stored_len + 5; /* force a stored block */
     }
-
     if (stored_len + 4 <= opt_lenb && buf !== -1) {
       /* 4: two words for the lengths */
 
@@ -1120,7 +1113,6 @@
       s.dyn_ltree[(_length_code[lc] + LITERALS$1 + 1) * 2] /*.Freq*/++;
       s.dyn_dtree[d_code(dist) * 2] /*.Freq*/++;
     }
-
     return s.sym_next === s.sym_end;
   };
   var _tr_init_1 = _tr_init$1;
@@ -1227,7 +1219,6 @@
     }
     return crc ^ -1; // >>> 0;
   };
-
   var crc32_1 = crc32;
 
   // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -1564,7 +1555,6 @@
     var best_len = s.prev_length; /* best match length so far */
     var nice_match = s.nice_match; /* stop if match long enough */
     var limit = s.strstart > s.w_size - MIN_LOOKAHEAD ? s.strstart - (s.w_size - MIN_LOOKAHEAD) : 0 /*NIL*/;
-
     var _win = s.window; // shortcut
 
     var wmask = s.w_mask;
@@ -1830,7 +1820,6 @@
       if (len > left + s.strm.avail_in) {
         len = left + s.strm.avail_in; /* limit len to the input */
       }
-
       if (len > have) {
         len = have; /* limit len to the output */
       }
@@ -1917,7 +1906,6 @@
           if (s.matches < 2) {
             s.matches++; /* add a pending slide_hash() */
           }
-
           if (s.insert > s.strstart) {
             s.insert = s.strstart;
           }
@@ -1954,7 +1942,6 @@
       if (s.matches < 2) {
         s.matches++; /* add a pending slide_hash() */
       }
-
       have += s.w_size; /* more space now */
       if (s.insert > s.strstart) {
         s.insert = s.strstart;
@@ -2044,7 +2031,6 @@
         s.match_length = longest_match(s, hash_head);
         /* longest_match() sets match_start */
       }
-
       if (s.match_length >= MIN_MATCH) {
         // check_match(s, s.strstart, s.match_start, s.match_length); // for debug only
 
@@ -2101,7 +2087,6 @@
         /***/
       }
     }
-
     s.insert = s.strstart < MIN_MATCH - 1 ? s.strstart : MIN_MATCH - 1;
     if (flush === Z_FINISH$1) {
       /*** FLUSH_BLOCK(s, 1); ***/
@@ -2120,7 +2105,6 @@
       }
       /***/
     }
-
     return BS_BLOCK_DONE;
   };
 
@@ -2236,7 +2220,6 @@
           flush_block_only(s, false);
           /***/
         }
-
         s.strstart++;
         s.lookahead--;
         if (s.strm.avail_out === 0) {
@@ -2276,7 +2259,6 @@
       }
       /***/
     }
-
     return BS_BLOCK_DONE;
   };
 
@@ -2350,7 +2332,6 @@
         /***/
       }
     }
-
     s.insert = 0;
     if (flush === Z_FINISH$1) {
       /*** FLUSH_BLOCK(s, 1); ***/
@@ -2369,7 +2350,6 @@
       }
       /***/
     }
-
     return BS_BLOCK_DONE;
   };
 
@@ -2408,7 +2388,6 @@
         /***/
       }
     }
-
     s.insert = 0;
     if (flush === Z_FINISH$1) {
       /*** FLUSH_BLOCK(s, 1); ***/
@@ -2427,7 +2406,6 @@
       }
       /***/
     }
-
     return BS_BLOCK_DONE;
   };
 
@@ -2689,7 +2667,6 @@
       s.wrap = -s.wrap;
       /* was made negative by deflate(..., Z_FINISH); */
     }
-
     s.status =
     //#ifdef GZIP
     s.wrap === 2 ? GZIP_STATE :
@@ -3053,7 +3030,6 @@
         }
         //---//
       }
-
       s.status = HCRC_STATE;
     }
     if (s.status === HCRC_STATE) {
@@ -3069,7 +3045,6 @@
         put_byte(s, strm.adler >> 8 & 0xff);
         strm.adler = 0; //crc32(0L, Z_NULL, 0);
       }
-
       s.status = BUSY_STATE;
 
       /* Compression must start with an empty pending buffer */
@@ -3093,7 +3068,6 @@
           s.last_flush = -1;
           /* avoid BUF_ERROR next call, see above */
         }
-
         return Z_OK$1;
         /* If flush != Z_NO_FLUSH && avail_out == 0, the next call
          * of deflate should use the same flush parameter to make sure
@@ -3103,7 +3077,6 @@
          * one empty block.
          */
       }
-
       if (bstate === BS_BLOCK_DONE) {
         if (flush === Z_PARTIAL_FLUSH) {
           _tr_align(s);
@@ -3277,14 +3250,14 @@
     deflateInfo: deflateInfo
   };
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
 
   var _has = function _has(obj, key) {

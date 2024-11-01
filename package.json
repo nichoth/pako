@@ -1,5 +1,5 @@
 {
-  "name": "pako",
+  "name": "@nichoth/pako",
   "description": "zlib port to javascript - fast, modularized, with browser support",
   "version": "2.1.0",
   "keywords": [
